@@ -1,7 +1,6 @@
 {
     "mongodbConfig": {
-        
-        "databaseUrl": "mongodb+srv://tony:tony@cluster0.tijq6.mongodb.net/kanban?retryWrites=true&w=majority",
+        "databaseUrl": "",
         "options": {
             "socketTimeoutMS": 3000,
             "connectTimeoutMS": 3000,
@@ -13,7 +12,7 @@
         }
     },
     "jwtConfig": {
-        "secret_token": "cbe3c6eaeca4051040e4877befbb2c6e328c015bf87f0dedb28a05ce46fabf524de725dd8d9437b088cc59163762269459450df2c62d6e1d080df860d7ff6206"
+        "secret_token": ""
     },
     "swaggerConfig": {
         "swaggerDefinition": {

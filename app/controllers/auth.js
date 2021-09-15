@@ -5,6 +5,14 @@ const { createJWT } = require("../utils/auth");
 
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
+
+/**
+ * This function comment is parsed by doctrine
+ * @route POST /signup
+ * @group Login and Register
+ * @returns {object} 201 - New user is created
+ * @returns {Error}  default - Unexpected error
+ */
 exports.signup = (req, res, next) => {
   let {
     firstName,
@@ -85,6 +93,14 @@ exports.signup = (req, res, next) => {
   })
 };
 
+
+/**
+ * This function comment is parsed by doctrine
+ * @route POST /signin
+ * @group Login and Register
+ * @returns {object} 200 - the user is logged 
+ * @returns {Error}  default - Unexpected error
+ */
 exports.signin = (req, res) => {
   const { email, password } = req.body;
 

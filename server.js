@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const {swaggerConfig} = require('./config.json')
+const {swaggerConfig,mongodbConfig} = require('./config.json')
 
 // import routes
 const authRoutes = require('./app/routes/auth');
@@ -12,7 +12,7 @@ const ticketRoutes = require('./app/routes/tickets');
 
 // database
 mongoose
-  .connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongodbConfig.databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database connected'))
   .catch(err => console.log('Mongoose connection error to database: ', err.message));
 

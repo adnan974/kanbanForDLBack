@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { createJWT } = require("../utils/auth");
+const { jwtConfig } = require('../../config.json');
 
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
@@ -26,34 +27,34 @@ exports.signup = (req, res, next) => {
 
   if (!firstName) {
     errors.push({ firstName: "required" });
-  }  
+  }
 
   if (!lastName) {
     errors.push({ lastName: "required" });
-  }  
-  
+  }
+
   if (!email) {
     errors.push({ email: "required" });
-  }  
-  
+  }
+
   if (!emailRegexp.test(email)) {
     errors.push({ email: "invalid" });
-  }  
-  
+  }
+
   if (!password) {
     errors.push({ password: "required" });
-  }  
-  
+  }
+
   if (!password_confirmation) {
     errors.push({
       password_confirmation: "required",
     });
-  }  
-  
+  }
+
   if (password != password_confirmation) {
     errors.push({ password: "mismatch" });
-  }  
-  
+  }
+
   if (errors.length > 0) {
     return res.status(422).json({ errors: errors });
   }
@@ -80,9 +81,9 @@ exports.signup = (req, res, next) => {
             })
           }).catch(err => {
             res.status(500).json({
-               errors: [{ error: err }]
+              errors: [{ error: err }]
             });
-         });
+          });
         })
       })
     }
@@ -105,19 +106,19 @@ exports.signin = (req, res) => {
   const { email, password } = req.body;
 
   const errors = [];
-  
+
   if (!email) {
     errors.push({ email: "required" });
-  }     
-  
+  }
+
   if (!emailRegexp.test(email)) {
     errors.push({ email: "invalid email" });
   }
-  
+
   if (!password) {
     errors.push({ passowrd: "required" });
   }
-  
+
   if (errors.length > 0) {
     return res.status(422).json({ errors: errors });
   }
@@ -130,7 +131,7 @@ exports.signin = (req, res) => {
     } else {
       bcrypt.compare(password, user.password).then(isMatch => {
         if (!isMatch) {
-          return res.status(400).json({ errors: [{ password: "incorrect" }]  });
+          return res.status(400).json({ errors: [{ password: "incorrect" }] });
         }
 
         let access_token = createJWT(
@@ -141,7 +142,7 @@ exports.signin = (req, res) => {
 
         jwt.verify(
           access_token,
-          process.env.TOKEN_SECRET, 
+          jwtConfig.secret_token,
           (err, decoded) => {
             if (err) {
               res.status(500).json({ errors: err });
@@ -161,5 +162,5 @@ exports.signin = (req, res) => {
     }
   }).catch(err => {
     res.status(500).json({ errors: err });
- });
+  });
 };

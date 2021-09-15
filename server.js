@@ -12,7 +12,7 @@ const ticketRoutes = require('./app/routes/tickets');
 
 // database
 mongoose
-  .connect(mongodbConfig.databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongodbConfig.databaseUrl, mongodbConfig.options)
   .then(() => console.log('Database connected'))
   .catch(err => console.log('Mongoose connection error to database: ', err.message));
 

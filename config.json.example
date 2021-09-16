@@ -2,13 +2,8 @@
     "mongodbConfig": {
         "databaseUrl": "",
         "options": {
-            "socketTimeoutMS": 3000,
-            "connectTimeoutMS": 3000,
-            "keepAlive": 3000,
             "useNewUrlParser": true,
-            "useUnifiedTopology": true,
-            "useCreateIndex": true,
-            "useFindAndModify": false
+            "useUnifiedTopology": true
         }
     },
     "jwtConfig": {

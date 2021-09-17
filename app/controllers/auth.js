@@ -11,16 +11,17 @@ const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
  * This function comment is parsed by doctrine
  * @route POST /signup
  * @group Login and Register
+ * @param {CreateUserDTO.model} user.body.required - the created user
  * @returns {object} 201 - New user is created
  * @returns {Error}  default - Unexpected error
  */
 exports.signup = (req, res, next) => {
+
   let {
     firstName,
     lastName,
     email,
-    password,
-    password_confirmation,
+    password
   } = req.body;
 
   const errors = [];
@@ -45,15 +46,6 @@ exports.signup = (req, res, next) => {
     errors.push({ password: "required" });
   }
 
-  if (!password_confirmation) {
-    errors.push({
-      password_confirmation: "required",
-    });
-  }
-
-  if (password != password_confirmation) {
-    errors.push({ password: "mismatch" });
-  }
 
   if (errors.length > 0) {
     return res.status(422).json({ errors: errors });
@@ -75,7 +67,7 @@ exports.signup = (req, res, next) => {
           if (err) throw err;
           user.password = hash;
           user.save().then(response => {
-            res.status(200).json({
+            res.status(201).json({
               success: true,
               result: response
             })
@@ -99,10 +91,12 @@ exports.signup = (req, res, next) => {
  * This function comment is parsed by doctrine
  * @route POST /signin
  * @group Login and Register
+ * @param {LoginDTO.model} login.body.required - login infos
  * @returns {object} 200 - the user is logged 
  * @returns {Error}  default - Unexpected error
  */
 exports.signin = (req, res) => {
+
   const { email, password } = req.body;
 
   const errors = [];

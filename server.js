@@ -7,8 +7,7 @@ const expressSwagger = require('express-swagger-generator')(app);
 const {swaggerConfig,mongodbConfig} = require('./config.json')
 
 // import routes
-const authRoutes = require('./app/routes/auth');
-const ticketRoutes = require('./app/routes/tickets');
+const routes = require('./app/routes/');
 
 // database
 mongoose
@@ -22,8 +21,7 @@ app.use(cors());
 
 
 //routes middleware
-app.use('/api', authRoutes);
-app.use('/api', ticketRoutes);
+app.use('/api', routes);
 
 
 //Swagger

@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const ticketSchema = new mongoose.Schema({
-  user_id: {
-     type: String,
-     required: true
-  },
+  
   title: {
     type: String,
     required: true,
@@ -15,10 +12,15 @@ const ticketSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  ticket_status: {
+  ticketStatus: {
     type: String,
     required: true
-  }
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required:true
+  },
 }, {
   timestamps: true,
   collection: 'tickets'

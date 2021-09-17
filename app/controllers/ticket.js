@@ -1,4 +1,6 @@
 const Ticket = require('../models/Ticket');
+const { validationResult } = require('express-validator');
+
 
 /**
  * This function comment is parsed by doctrine
@@ -6,88 +8,59 @@ const Ticket = require('../models/Ticket');
  * @group Tickets - Operations about tickets
  * @returns {object} 200 - An array of tickets info
  * @returns {Error}  default - Unexpected error
+ * @security JWT
  */
-exports.getTicket = (req, res, next) => {
-  const {
-    user_id,
-  } = req.body;
+exports.getAllTickets = (req, res, next) => {
 
-  Ticket.find({ user_id }).then(data => {
+  Ticket.find().then(data => {
     res.status(200).json({ data })
   }).catch(error => {
     res.status(422).json({ error });
   })
 }
 
+
 /**
  * This function comment is parsed by doctrine
- * @route POST /tickets
+ * @route GET /tickets/{id}
  * @group Tickets - Operations about tickets
- * @returns {object} 201 - The ticket is created
+ * @param {string} id.path.required - ticket id
+ * @returns {object} 200 - A ticket info
  * @returns {Error}  default - Unexpected error
  */
-exports.postTicket = (req, res, next) => {
-  const {
-    user_id,
-    title,
-    description,
-    labels,
-    ticketNumber
-  } = req.body;
+exports.getOneTicket = (req, res, next) => {
 
-  const errors = [];
+  const userId = req.params.id;
 
-  if (!user_id) {
-    errors.push({ user_id: "required" });
-  }
-
-  if (!title) {
-    errors.push({ title: "required" });
-  }
-
-  if (errors.length > 0) {
-    return res.status(422).json({ errors: errors });
-  }
-
-  const ticket = new Ticket({
-    user_id,
-    title,
-    description,
-    labels,
-    ticketNumber,
+  Ticket.findById(userId).then(data => {
+    res.status(200).json({ data })
+  }).catch(error => {
+    res.status(422).json({ error });
   })
-
-  ticket.save().then(response => {
-    res.status(200).json({
-      success: true,
-      result: response
-    })
-  }).catch(err => {
-    res.status(500).json({
-      errors: [{ error: err }]
-    });
-  });
 }
 
+
 /**
  * This function comment is parsed by doctrine
- * @route PATCH /tickets
+ * @route PATCH /tickets/{id}
  * @group Tickets - Operations about tickets
- * @returns {object} 200 - The ticket is updated
+ * @param {string} id.path.required - ticket id
+ * @param {UpdateTicketDTO.model} ticket.body.required - the updated ticket
+ * @returns {object} 200 - Succes: ticket updated
  * @returns {Error}  default - Unexpected error
  */
-exports.updateTicket = (req, res, next) => {
+ exports.updateTicket = (req, res, next) => {
+
+  const ticketId = req.params.id;
+
   const {
-    ticket_id,
-    user_id,
     title,
     description,
     labels,
     ticketNumber
   } = req.body;
 
-  Ticket.findByIdAndUpdate(ticket_id, {
-    user_id,
+  Ticket.findByIdAndUpdate(ticketId, {
     title,
     description,
     labels,
@@ -96,7 +69,7 @@ exports.updateTicket = (req, res, next) => {
     if (error) {
       res.status(422).json({ error });
     } else {
-      res.send("ticket modified");
+      res.send("ticket updated");
     }
   })
 }
@@ -106,15 +79,14 @@ exports.updateTicket = (req, res, next) => {
  * This function comment is parsed by doctrine
  * @route DELETE /tickets
  * @group Tickets - Operations about tickets
- * @returns {object} 200 - The ticket is deleted
+ * @returns {object} 200 - Succes: ticket deleted
  * @returns {Error}  default - Unexpected error
  */
 exports.deleteTicket = (req, res, next) => {
-  const {
-    ticket_id
-  } = req.body;
 
-  Ticket.findByIdAndDelete(ticket_id).then(() => {
+  const ticketId = req.params.id;
+
+  Ticket.findByIdAndDelete(ticketId).then(() => {
     res.status(200).json({ success: true });
   }).catch(error => {
     res.status(422).json({ error });

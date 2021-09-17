@@ -1,5 +1,4 @@
 const Ticket = require('../models/Ticket');
-const { validationResult } = require('express-validator');
 
 
 /**

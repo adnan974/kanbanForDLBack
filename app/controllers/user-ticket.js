@@ -15,6 +15,14 @@ const { validationResult } = require('express-validator');
  */
  exports.postUserTicket = (req, res, next) => {
 
+  const errors  = validationResult(req)
+
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  
   const owner = req.params.id;
 
   const {
@@ -25,28 +33,7 @@ const { validationResult } = require('express-validator');
     ticketStatus
   } = req.body;
 
-  const errors  = validationResult(req)
-
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  // return res.status(200).json("");
-
-  /*const errors = [];
-
-  if (!user_id) {
-    errors.push({ user_id: "required" });
-  }
-
-  if (!title) {
-    errors.push({ title: "required" });
-  }
-
-  if (errors.length > 0) {
-    return res.status(422).json({ errors: errors });
-  }*/
+  
 
   const ticket = new Ticket({
     owner,

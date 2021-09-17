@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { createJWT } = require("../utils/auth");
 const { jwtConfig } = require('../../config.json');
+const { validationResult } = require('express-validator');
+
 
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
@@ -17,12 +19,8 @@ const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
  */
 exports.signup = (req, res, next) => {
 
-  let {
-    firstName,
-    lastName,
-    email,
-    password
-  } = req.body;
+  //Todo
+  //const errors  = validationResult(req)
 
   const errors = [];
 

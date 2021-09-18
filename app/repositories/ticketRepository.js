@@ -18,7 +18,7 @@ exports.giveTicketsIsInProgressSince3Days = async () => {
         const diffHours = diffTime / (1000 * 60 * 60);
 
 
-        if (diffHours >= 0) {
+        if (diffHours >= 72) {
             ticketsInProgressSince3Days.push(ticket)
         }
 

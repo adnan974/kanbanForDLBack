@@ -5,15 +5,19 @@ const { body } = require('express-validator');
 
 const { deleteUser } = require('../../controllers/user');
 const { postUserTicket } = require('../../controllers/user-ticket');
+const { getUserNotifications } = require('../../controllers/user-notification');
 
 
 router.delete('/:id', deleteUser);
+
 router.post(
-            '/:id/tickets',
-             body('title').notEmpty(),
-             body('description').notEmpty(),
-             postUserTicket
-            );
+    '/:id/tickets',
+    body('title').notEmpty(),
+    body('description').notEmpty(),
+    postUserTicket
+);
+
+router.get('/:id/notifications', getUserNotifications);
 
 
 

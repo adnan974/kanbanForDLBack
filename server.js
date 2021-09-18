@@ -4,7 +4,15 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const {swaggerConfig,mongodbConfig} = require('./config.json')
+const {swaggerConfig,mongodbConfig} = require('./config.json');
+const { giveTicketsIsInProgressSince3Days } = require('./app/repositories/ticketRepository');
+
+
+// // Todo: a modifier
+// const {scheduler} = require('./app/utils/jobs')
+
+// // Scheduled task
+// scheduler();
 
 // import routes
 const routes = require('./app/routes/');

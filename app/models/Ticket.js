@@ -16,6 +16,9 @@ const ticketSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  dateInProgressStatus:{
+    type:Date,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

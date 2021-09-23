@@ -22,6 +22,14 @@ exports.signup = (req, res, next) => {
   //Todo
   //const errors  = validationResult(req)
 
+  
+  const {
+    firstName,
+    lastName,
+    email,
+    password
+  }=req.body;
+
   const errors = [];
 
   if (!firstName) {
@@ -43,7 +51,6 @@ exports.signup = (req, res, next) => {
   if (!password) {
     errors.push({ password: "required" });
   }
-
 
   if (errors.length > 0) {
     return res.status(422).json({ errors: errors });

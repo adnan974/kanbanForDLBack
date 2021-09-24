@@ -4,13 +4,17 @@ const { body } = require('express-validator');
 
 
 const { deleteUser, getAllusers } = require('../../controllers/user');
-const { postUserTicket } = require('../../controllers/user-ticket');
+const { postUserTicket, getUserTickets } = require('../../controllers/user-ticket');
 const { getUserNotifications } = require('../../controllers/user-notification');
 
 
 router.get('/', getAllusers);
 router.delete('/:id', deleteUser);
 
+router.get(
+    '/:id/tickets',
+    getUserTickets
+);
 router.post(
     '/:id/tickets',
     body('title').notEmpty(),

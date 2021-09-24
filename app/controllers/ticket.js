@@ -29,9 +29,9 @@ exports.getAllTickets = (req, res, next) => {
  */
 exports.getOneTicket = (req, res, next) => {
 
-  const userId = req.params.id;
+  const ticketId = req.params.id;
 
-  Ticket.findById(userId).then(data => {
+  Ticket.findById(ticketId).then(data => {
     res.status(200).json({ data })
   }).catch(error => {
     res.status(422).json({ error });

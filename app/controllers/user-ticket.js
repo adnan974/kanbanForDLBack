@@ -4,6 +4,28 @@ const { validationResult } = require('express-validator');
 
 /**
  * This function comment is parsed by doctrine
+ * @route GET /users/{id}/tickets
+ * @group Users and Tickets - Operations about users and tickets
+ * @param {string} id.path.required - user id
+ * @produces application/json
+ * @returns {object} 200 - 
+ * @returns {Error}  default - Unexpected error
+ */
+exports.getUserTickets = (req,res)=>{
+  const userId = req.params.id
+
+  Ticket.find({owner:userId})
+  .then(tickets=>{
+    res.status(200).json(tickets);
+  })
+  .catch(err=>{
+    res.status(400);
+
+  })
+}
+
+/**
+ * This function comment is parsed by doctrine
  * @route POST /users/{id}/tickets
  * @group Users and Tickets - Operations about users and tickets
  * @param {string} id.path.required - user id

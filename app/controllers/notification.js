@@ -9,8 +9,6 @@ const Notification = require("../models/Notification");
  */
  exports.getAllNotifications = (req, res) => {
 
-    const notificationId = req.params.id;
-
     Notification.find()
     .then(notifs=>{
         res.json(notifs)
@@ -19,13 +17,6 @@ const Notification = require("../models/Notification");
         res.status(400).json(err);
     })
 
-    Notification.findByIdAndDelete(notificationId)
-        .then(() => {
-            return res.status(200).json({ success: true });
-        })
-        .catch(error => {
-            res.status(422).json({ error });
-        })
 }
 
 

@@ -26,6 +26,7 @@ exports.scheduler = () => {
             const notification = new Notification({
                 title: `ticket (title: ${ticket.title}) status has changed`,
                 description: `this ticked was in progress since 3 days, it's now in the todo list`,
+                status:"Unread",
                 associatedUser: ticket.owner
             })
 

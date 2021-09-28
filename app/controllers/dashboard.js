@@ -19,4 +19,13 @@ exports.deleteDashboard = (req, res) => {
     })
   }
   
+exports.getDashboard = (req, res) => {
   
+  const dashboardId = req.params.id;
+
+  Dashboard.findById(dashboardId).then(data => {
+    res.status(200).json({ data })
+  }).catch(error => {
+    res.status(422).json({ error });
+  })
+}

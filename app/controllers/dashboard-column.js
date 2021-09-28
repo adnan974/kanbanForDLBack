@@ -13,20 +13,20 @@ const Dashboard = require("../models/Dashboard");
  * @returns {object} 201 - The column is created in the dashboard
  * @returns {Error}  default - Unexpected error
  */
+
 exports.addColumnToDashboard = async (req, res) => {
-
-    console.log("on est ici")
-
+    console.log(req);
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
+    console.log(req.params, 'les params')
+
     const dashboardId = req.params.id;
 
     let dashboard = await Dashboard.findById(dashboardId);
-
 
     const column = new Column({
         title: req.body.title,
@@ -66,4 +66,31 @@ exports.addColumnToDashboard = async (req, res) => {
 
 
 
+}
+
+exports.getColumn = (req, res) => {
+    dashboardId = req.params.id;
+
+    Column.find({ associatedDashboard: dashboardId }).then(column => {
+        res.status(201).json({
+            success: true,
+            result: column
+        })
+    }).catch(err => {
+        res.status(500).json({
+            errors: [{ error: err }]
+        });
+    })
+}
+
+exports.deleteColumn = (req, res) => {
+    columnId = req.params.columnId;
+
+    Column.findByIdAndDelete(columnId).then(() => {
+        res.status(201).json({ success: true })
+    }).catch(err => {
+        res.status(500).json({
+            errors: [{ error: err }]
+        });
+    })
 }

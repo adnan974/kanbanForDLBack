@@ -9,7 +9,7 @@ const Notification = require("../models/Notification")
  * @returns {Error}  default - Unexpected error
  */
 exports.getUserNotifications = (req, res) => {
-
+/*
     const userId = req.params.id;
 
     Notification.find({ associatedUser: userId })
@@ -19,5 +19,5 @@ exports.getUserNotifications = (req, res) => {
         .catch((err) => {
             res.status(422).json({ error });
         })
-
+*/
 }

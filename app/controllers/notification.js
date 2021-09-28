@@ -102,7 +102,7 @@ exports.softDeleteNotification =   (req, res) => {
 
     const notificationId = req.params.id;
 
-    Notification.findByIdAndUpdate(notificationId,{$set:{status:"deleted"}})
+    Notification.findByIdAndUpdate(notificationId,{$set:{status:"Deleted"}})
         .then((notification) => {
             return res.status(200).json(notification);
         })

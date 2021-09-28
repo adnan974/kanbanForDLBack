@@ -6,6 +6,7 @@ const { body } = require('express-validator');
 const { deleteUser, getAllusers } = require('../../controllers/user');
 const { postUserTicket, getUserTickets } = require('../../controllers/user-ticket');
 const { getUserNotifications } = require('../../controllers/user-notification');
+const { getUserDashboard, postUserDashboard } = require('../../controllers/user-dashboard');
 
 
 router.get('/', getAllusers);
@@ -20,6 +21,16 @@ router.post(
     body('title').notEmpty(),
     body('description').notEmpty(),
     postUserTicket
+);
+
+router.get(
+    '/:id/dashboards',
+    getUserDashboard
+);
+router.post(
+    '/:id/dashboards',
+    body('title').notEmpty(),
+    postUserDashboard
 );
 
 router.get('/:id/notifications', getUserNotifications);

@@ -56,7 +56,9 @@ exports.getOneTicket = (req, res, next) => {
     title,
     description,
     labels,
-    ticketNumber
+    ticketNumber,
+    associatedDashboard,
+    associatedColumn
   } = req.body;
 
   Ticket.findByIdAndUpdate(ticketId, {
@@ -64,6 +66,8 @@ exports.getOneTicket = (req, res, next) => {
     description,
     labels,
     ticketNumber,
+    associatedDashboard,
+    associatedColumn
   }, (error) => {
     if (error) {
       res.status(422).json({ error });

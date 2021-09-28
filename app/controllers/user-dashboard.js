@@ -16,7 +16,7 @@ exports.getUserDashboard = (req, res) => {
   return Dashboard.find({ associatedUser: userId })
     .populate('columnList')
     .exec((err, dashboards) => {
-      if (err) res.status(422).json({ err });
+      if (err) return res.status(422).json({ err });
 
       res.status(200).json({ dashboards })
     })

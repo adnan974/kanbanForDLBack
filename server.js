@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+
 //routes middleware
 app.use('/api', routes);
 

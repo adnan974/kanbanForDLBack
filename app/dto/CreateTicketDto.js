@@ -10,7 +10,7 @@
  * @property {string} associatedColumn
  */
 CreateTicketDTO = {
-    
+
     title: {
         type: String,
         required: true,
@@ -25,14 +25,14 @@ CreateTicketDTO = {
         type: String,
         required: true
     },
-    associatedDashboard:{
+    associatedDashboard: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Dashboard",
-        required:true
-      },
-      associatedColumn:{
+        required: true
+    },
+    associatedColumn: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Column",
-        required:true
-      },
+        required: true
+    },
 }

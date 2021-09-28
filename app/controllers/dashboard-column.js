@@ -46,14 +46,14 @@ exports.addColumnToDashboard = async (req, res) => {
 
             console.log(dashboard);
 
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 result: response
             })
         })
         .catch(err => {
             res.status(500).json({
-                errors: [{ error: err +"123"}]
+                errors: [{ error: err}]
             });
         });
 

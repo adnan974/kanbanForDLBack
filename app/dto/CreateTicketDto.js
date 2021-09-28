@@ -6,6 +6,8 @@
  * @property {number} ticketNumber
  * @property {[string]} labels
  * @property {string} ticketStatus
+ * @property {string} associatedDashboard
+ * @property {string} associatedColumn
  */
 CreateTicketDTO = {
     
@@ -22,5 +24,15 @@ CreateTicketDTO = {
     ticketStatus: {
         type: String,
         required: true
-    }
+    },
+    associatedDashboard:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Dashboard",
+        required:true
+      },
+      associatedColumn:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Column",
+        required:true
+      },
 }

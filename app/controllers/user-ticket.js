@@ -37,12 +37,15 @@ exports.getUserTickets = (req,res)=>{
  */
  exports.postUserTicket = (req, res, next) => {
 
+  // TODO: Verification à faire si on ajoute un id d'un dashboard dans le ticket, 
+  // Il faut que le userId du dashboard corresponde a celui qui est donnée en parametre
   const errors  = validationResult(req)
 
 
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+
 
   
   const owner = req.params.id;
@@ -52,7 +55,9 @@ exports.getUserTickets = (req,res)=>{
     description,
     labels,
     ticketNumber,
-    ticketStatus
+    ticketStatus,
+    associatedDashboard,
+    associatedColumn,
   } = req.body;
 
   
@@ -63,7 +68,9 @@ exports.getUserTickets = (req,res)=>{
     description,
     labels,
     ticketNumber,
-    ticketStatus
+    ticketStatus,
+    associatedDashboard,
+    associatedColumn
     
   })
 

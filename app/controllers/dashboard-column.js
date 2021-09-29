@@ -83,14 +83,3 @@ exports.getColumn = (req, res) => {
     })
 }
 
-exports.deleteColumn = (req, res) => {
-    columnId = req.params.columnId;
-
-    Column.findByIdAndDelete(columnId).then(() => {
-        res.status(201).json({ success: true })
-    }).catch(err => {
-        res.status(500).json({
-            errors: [{ error: err }]
-        });
-    })
-}

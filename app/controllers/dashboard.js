@@ -1,26 +1,33 @@
 const Dashboard = require("../models/Dashboard");
 
-  /**
+
+/**
  * This function comment is parsed by doctrine
- * @route DELETE /dashboards/{id}
+ * @route GET /dashboards
+ * @group Dashboards - Operations about dashboards
+ * @returns {object} 200 - Get all dashboards info
+ * @returns {Error}  default - Unexpected error
+*/
+exports.getAllDashboards = (req, res) => {
+
+
+  Dashboard.find().then(data => {
+    res.status(200).json({ data })
+  }).catch(error => {
+    res.status(422).json({ error });
+  })
+}
+
+/**
+ * This function comment is parsed by doctrine
+ * @route GET /dashboards/{id}
  * @group Dashboards - Operations about dashboards
  * @param {string} id.path.required - dashboard id
- * @returns {object} 200 - Succes: dashboard deleted
+ * @returns {object} 200 - Get dashboard info
  * @returns {Error}  default - Unexpected error
- */
-exports.deleteDashboard = (req, res) => {
-
-    const dashboardId = req.params.id;
-  
-    Dashboard.findByIdAndDelete(dashboardId).then(() => {
-      res.status(200).json({ success: true });
-    }).catch(error => {
-      res.status(422).json({ error });
-    })
-  }
-  
+*/
 exports.getDashboard = (req, res) => {
-  
+
   const dashboardId = req.params.id;
 
   Dashboard.findById(dashboardId).then(data => {
@@ -29,3 +36,25 @@ exports.getDashboard = (req, res) => {
     res.status(422).json({ error });
   })
 }
+
+
+/**
+* This function comment is parsed by doctrine
+* @route DELETE /dashboards/{id}
+* @group Dashboards - Operations about dashboards
+* @param {string} id.path.required - dashboard id
+* @returns {object} 200 - Succes: dashboard deleted
+* @returns {Error}  default - Unexpected error
+*/
+exports.deleteDashboard = (req, res) => {
+
+  const dashboardId = req.params.id;
+
+  Dashboard.findByIdAndDelete(dashboardId).then(() => {
+    res.status(200).json({ success: true });
+  }).catch(error => {
+    res.status(422).json({ error });
+  })
+}
+
+

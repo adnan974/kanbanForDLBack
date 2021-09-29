@@ -20,9 +20,7 @@ const columnSchema = new mongoose.Schema({
 
 columnSchema.pre('remove', function (next) {
 
-  console.log("trigger");
   var column = this;
-  console.log(column._id);
   this.model('Dashboard').update(
       { columnList: column._id }, 
       { $pull: { columnList: column._id } }, 

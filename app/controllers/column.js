@@ -27,10 +27,8 @@ exports.getAllColumns = (req, res) => {
 exports.deleteColumn = async (req, res, next) => {
 
     const columnId = req.params.id;
-    console.log(columnId)
     const column = await Column.findOne({ _id: columnId });
 
-    console.log(column);
 
     
     column.remove()

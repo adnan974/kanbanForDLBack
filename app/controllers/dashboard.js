@@ -48,7 +48,6 @@ exports.getDashboard = (req, res) => {
  * @returns {Error}  default - Unexpected error
  */
  exports.updateDashboard = (req, res, next) => {
-
   const dashboardId = req.params.id;
 
   const {
@@ -65,7 +64,7 @@ exports.getDashboard = (req, res) => {
     if (error) {
       res.status(422).json({ error });
     } else {
-      res.send("dashboard updated");
+      res.status(200).json("sucess");
     }
   })
 }

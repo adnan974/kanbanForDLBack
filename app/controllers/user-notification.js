@@ -5,11 +5,11 @@ const Notification = require("../models/Notification")
  * @route GET /users/{id}/notifications
  * @group Users and Notifications - Operations about users and notifications
  * @param {string} id.path.required - user id
- * @returns {object} 200 - An array of tickets info
+ * @returns {object} 200 - An array of notifications info of an user
  * @returns {Error}  default - Unexpected error
  */
 exports.getUserNotifications = (req, res) => {
-/*
+
     const userId = req.params.id;
 
     Notification.find({ associatedUser: userId })
@@ -19,5 +19,5 @@ exports.getUserNotifications = (req, res) => {
         .catch((err) => {
             res.status(422).json({ error });
         })
-*/
+
 }

@@ -39,12 +39,4 @@ exports.deleteColumn = async (req, res, next) => {
         res.status(422).json({ error });
     })
 
-    // Column.findOneAndDelete({_id:columnId}).exec()
-    // .then((result) => {
-    //     console.log(result);
-    //     res.status(200).json({ success: true });
-    // }).catch(error => {
-    //     console.log(error)
-    //     res.status(422).json({ error });
-    // })
 }

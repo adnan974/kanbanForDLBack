@@ -19,7 +19,8 @@ router.get(
 router.post(
     '/:id/tickets',
     body('title').notEmpty(),
-    body('description').notEmpty(),
+    body('associatedDashboard').notEmpty(),
+    body('associatedColumn').notEmpty(),
     postUserTicket
 );
 

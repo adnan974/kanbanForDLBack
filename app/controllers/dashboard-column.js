@@ -83,3 +83,13 @@ exports.getColumn = (req, res) => {
     })
 }
 
+exports.updateColumns = function (req, res) {
+    const { columns } = req.body;
+    const dashboardId = req.params.id;
+
+    Dashboard.findByIdAndUpdate(dashboardId, { columns: columns }).then(function () {
+        return res.status(200).json({ success:"true" });
+    }).catch(error => {
+        return res.status(422).json({ error });
+    })
+} 

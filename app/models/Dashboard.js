@@ -10,7 +10,7 @@ const dashboardSchema = new mongoose.Schema({
         type: String,
     },
     labels: {
-        type:[String]
+        type: [String]
     },
     columnList: [
         {
@@ -27,5 +27,19 @@ const dashboardSchema = new mongoose.Schema({
     timestamps: true,
     collection: 'dashboard'
 })
+
+dashboardSchema.pre('remove', function (next) {
+    var dashboard = this;
+
+    this.model('Ticket').deleteMany({ associatedDashboard: dashboard._id }, (err, result) => {
+        if (err) return next(new Error("Internal error"));
+
+        this.model('Column').deleteMany({ associatedDashboard: dashboard._id }, (err, result) => {
+            if (err) return next(new Error("Internal error"));
+            next();
+        })
+    })
+
+});
 
 module.exports = mongoose.model('Dashboard', dashboardSchema);

@@ -78,15 +78,18 @@ exports.getDashboard = (req, res) => {
 * @returns {object} 200 - Succes: dashboard deleted
 * @returns {Error}  default - Unexpected error
 */
-exports.deleteDashboard = (req, res) => {
+exports.deleteDashboard = async (req, res) => {
 
   const dashboardId = req.params.id;
+  const dashboard = await Dashboard.findOne({_id:dashboardId});
 
-  Dashboard.findByIdAndDelete(dashboardId).then(() => {
-    res.status(200).json({ success: true });
-  }).catch(error => {
-    res.status(422).json({ error });
-  })
+  dashboard.remove()
+    .then((result) => {
+        res.status(200).json({ success: true });
+    }).catch(error => {
+        console.log(error)
+        res.status(422).json({ error });
+    })
 }
 
 

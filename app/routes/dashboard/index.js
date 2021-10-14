@@ -16,8 +16,6 @@ router.get('/:id/tickets',getDashboardTickets);
 router.post('/:id/columns', body('title').notEmpty(), addColumnToDashboard);
 router.get('/:id/columns', getColumn);
 
-router.patch('/:id/columns', updateColumns);
-
 router.get('/:id/tickets', getDashboardTickets)
 
 module.exports = router

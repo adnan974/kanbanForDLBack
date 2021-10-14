@@ -40,3 +40,23 @@ exports.deleteColumn = async (req, res, next) => {
     })
 
 }
+
+/**
+ * This function comment is parsed by doctrine
+ * @route PATCH /columns/{id}
+ * @group Column - Operations about columns
+ * @param {string} id.path.required - column id
+ * @param {CreateColumnDTO.model} column.body.required - the updated column
+ * @returns {object} 200 - Succes: column updated
+ * @returns {Error}  default - Unexpected error
+ */
+exports.updateColumn = function (req, res) {
+    const UptatedColumn = req.body;
+    const columnId = req.params.id;
+
+    Column.findByIdAndUpdate(columnId, UptatedColumn).then(function () {
+        return res.status(200).json({ success:"true" });
+    }).catch(error => {
+        return res.status(422).json({ error });
+    })
+} 

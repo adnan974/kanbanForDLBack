@@ -40,3 +40,17 @@ exports.deleteColumn = async (req, res, next) => {
     })
 
 }
+
+exports.updateColumnList = function (req, res) {
+    const ticketList = req.body;
+    const columnId = req.params.id;
+    console.log(ticketList, columnId);
+
+    Column.findById(columnId)
+        .then(_res => {
+            res.stauts(200).json({ success: true })
+        })
+        .catch(error => {
+            res.status(422).json({ error });
+        });
+}

@@ -6,7 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const { mongodbConfig } = require('../config.json');
+const { mongodbConfig } = require('./config.json');
 
 
 // // Todo: a modifier
@@ -16,7 +16,7 @@ const { mongodbConfig } = require('../config.json');
 // scheduler();
 
 // import routes
-const routes = require('./routes');
+const routes = require('./app/routes');
 
 // database
 const mongoDbOptions = {
@@ -67,7 +67,7 @@ const _swaggerConfig = {
 expressSwagger({
   swaggerDefinition: _swaggerConfig,
   basedir: __dirname,
-  files: ['./**/*.js']
+  files: ['./app/**/*.js']
 })
 
 app.listen(process.env.PORT || 3000, () => {

@@ -1,11 +1,12 @@
+console.log("server.js");
+
 const app = require('express')();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const { swaggerConfig, mongodbConfig } = require('../config.json');
-const { giveTicketsIsInProgressSince3Days } = require('./repositories/ticketRepository');
+const { mongodbConfig } = require('../config.json');
 
 
 // // Todo: a modifier

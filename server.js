@@ -1,4 +1,3 @@
-console.log("server.js");
 
 const app = require('express')();
 const bodyParser = require('body-parser');
@@ -6,7 +5,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const { mongodbConfig } = require('./config.json') || "";
+try{
+  var { mongodbConfig } = require('./config.json');
+}
+catch(err){
+  console.log("erreur");
+  var mongodbConfig = "";
+}
 
 
 // // Todo: a modifier

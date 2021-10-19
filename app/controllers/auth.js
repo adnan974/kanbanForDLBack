@@ -2,8 +2,15 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { createJWT } = require("../utils/auth");
-const { jwtConfig } = require('../../config.json');
 const { validationResult } = require('express-validator');
+try{
+  var { jwtConfig } = require('../../config.json');
+}
+catch(err){
+  var jwtConfig = "";
+}
+
+
 
 
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -123,6 +130,7 @@ exports.signin = (req, res) => {
   }
 
   User.findOne({ email: email }).then(user => {
+
     if (!user) {
       return res.status(404).json({
         errors: [{ user: "not found" }],
@@ -133,15 +141,19 @@ exports.signin = (req, res) => {
           return res.status(400).json({ errors: [{ password: "incorrect" }] });
         }
 
+
         let access_token = createJWT(
           user.email,
           user._id,
           3600
         );
 
+
+        const token = process.env.SECRET_TOKEN || jwtConfig.secret_token;
+
         jwt.verify(
           access_token,
-          jwtConfig.secret_token,
+          token,
           (err, decoded) => {
             if (err) {
               res.status(500).json({ errors: err });

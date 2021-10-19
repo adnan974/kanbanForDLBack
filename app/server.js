@@ -4,8 +4,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const { swaggerConfig, mongodbConfig } = require('./config.json');
-const { giveTicketsIsInProgressSince3Days } = require('./app/repositories/ticketRepository');
+const { swaggerConfig, mongodbConfig } = require('../config.json');
+const { giveTicketsIsInProgressSince3Days } = require('./repositories/ticketRepository');
 
 
 // // Todo: a modifier
@@ -15,7 +15,7 @@ const { giveTicketsIsInProgressSince3Days } = require('./app/repositories/ticket
 // scheduler();
 
 // import routes
-const routes = require('./app/routes/');
+const routes = require('./routes');
 
 // database
 const mongoDbOptions = {
@@ -66,7 +66,7 @@ const _swaggerConfig = {
 expressSwagger({
   swaggerDefinition: _swaggerConfig,
   basedir: __dirname,
-  files: ['./app/**/*.js']
+  files: ['./**/*.js']
 })
 
 app.listen(process.env.PORT || 3000, () => {

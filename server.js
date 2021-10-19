@@ -6,7 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const { mongodbConfig } = require('./config.json');
+const { mongodbConfig } = require('./config.json') || "";
 
 
 // // Todo: a modifier

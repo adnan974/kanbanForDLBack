@@ -5,10 +5,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-try{
+try {
   var { mongodbConfig } = require('./config.json');
 }
-catch(err){
+catch (err) {
   console.log("erreur");
   var mongodbConfig = "";
 }
@@ -35,7 +35,12 @@ mongoose
 
 // middlewares
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 
 
 

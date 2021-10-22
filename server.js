@@ -55,7 +55,7 @@ const _swaggerConfig = {
     "title": "Swagger",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": process.env.SWAGGER_HOST || "localhost:3000",
   "basePath": "/api",
   "produces": [
     "application/json",

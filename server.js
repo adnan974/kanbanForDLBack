@@ -1,11 +1,17 @@
+
 const app = require('express')();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressSwagger = require('express-swagger-generator')(app);
-const { swaggerConfig, mongodbConfig } = require('./config.json');
-const { giveTicketsIsInProgressSince3Days } = require('./app/repositories/ticketRepository');
+try {
+  var { mongodbConfig } = require('./config.json');
+}
+catch (err) {
+  console.log("erreur");
+  var mongodbConfig = "";
+}
 
 
 // // Todo: a modifier
@@ -15,7 +21,7 @@ const { giveTicketsIsInProgressSince3Days } = require('./app/repositories/ticket
 // scheduler();
 
 // import routes
-const routes = require('./app/routes/');
+const routes = require('./app/routes');
 
 // database
 const mongoDbOptions = {
@@ -29,7 +35,12 @@ mongoose
 
 // middlewares
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 
 //routes middleware
 app.use('/api', routes);
@@ -41,7 +52,7 @@ const _swaggerConfig = {
     "title": "Swagger",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": process.env.SWAGGER_HOST || "localhost:3000",
   "basePath": "/api",
   "produces": [
     "application/json",

@@ -8,7 +8,6 @@ const Column = require("../models/Column");
  * @returns {Error}  default - Unexpected error
  */
 exports.getAllColumns = (req, res) => {
-
     Column.find().then(data => {
         res.status(200).json({ data })
     }).catch(error => {

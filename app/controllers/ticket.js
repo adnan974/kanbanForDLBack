@@ -72,7 +72,7 @@ exports.getOneTicket = (req, res, next) => {
     if (error) {
       res.status(422).json({ error });
     } else {
-      res.send("ticket updated");
+      res.status(200).json({sucess:"true"});
     }
   })
 }

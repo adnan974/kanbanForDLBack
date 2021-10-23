@@ -42,11 +42,8 @@ app.use(cors({
   "optionsSuccessStatus": 204
 }));
 
-
-
 //routes middleware
 app.use('/api', routes);
-
 
 //Swagger
 const _swaggerConfig = {

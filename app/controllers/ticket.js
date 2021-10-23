@@ -49,9 +49,7 @@ exports.getOneTicket = (req, res, next) => {
  * @returns {Error}  default - Unexpected error
  */
  exports.updateTicket = (req, res, next) => {
-
   const ticketId = req.params.id;
-
   const {
     title,
     description,
@@ -68,13 +66,11 @@ exports.getOneTicket = (req, res, next) => {
     ticketNumber,
     associatedDashboard,
     associatedColumn
-  }, (error) => {
-    if (error) {
+  }).then(ticket => {
+      res.status(200).json({ success: true, ticket });
+    }).catch((error) => {
       res.status(422).json({ error });
-    } else {
-      res.send("ticket updated");
-    }
-  })
+    })
 }
 
 

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const Dashboard = require('./Dashboard');
 
-const columnSchema = new mongoose.Schema({
-  
+const columnSchema = new mongoose.Schema({  
   title: {
     type: String,
     required: true,
@@ -10,16 +8,18 @@ const columnSchema = new mongoose.Schema({
   associatedDashboard:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Dashboard",
-    required:true
+    required: true
   },
+  ticketList: {
+    type: [mongoose.Schema.Types.ObjectId],
+    required: true
+  }
 }, {
   timestamps: true,
   collection: 'column'
 })
 
-
 columnSchema.pre('remove', function (next) {
-
   var column = this;
   this.model('Dashboard').update(
       { columnList: column._id }, 

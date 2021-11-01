@@ -77,7 +77,7 @@ exports.getUserTickets = (req,res)=>{
   ticket.save().then(response => {
     res.status(200).json({
       success: true,
-      result: response
+      result: ticket
     })
   }).catch(err => {
     res.status(500).json({

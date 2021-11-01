@@ -53,8 +53,8 @@ exports.updateColumn = function (req, res) {
     const UptatedColumn = req.body;
     const columnId = req.params.id;
 
-    Column.findByIdAndUpdate(columnId, UptatedColumn).then(function () {
-        return res.status(200).json({ success:"true" });
+    Column.findByIdAndUpdate(columnId, UptatedColumn).then(() => {
+        return res.status(200).json({ success:"true", result: UptatedColumn });
     }).catch(error => {
         return res.status(422).json({ error });
     })

@@ -15,36 +15,25 @@ const Dashboard = require("../models/Dashboard");
  */
 
 exports.addColumnToDashboard = async (req, res) => {
-    console.log(req);
     const errors = validationResult(req)
+    const dashboardId = req.params.id;
+    const dashboard = await Dashboard.findById(dashboardId);
 
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log(req.params, 'les params')
-
-    const dashboardId = req.params.id;
-
-    let dashboard = await Dashboard.findById(dashboardId);
-
     const column = new Column({
         title: req.body.title,
+        columnList: [],
         associatedDashboard: dashboardId
     })
 
-
     column.save().then(response => {
-
-        console.log(response); 
-
         dashboard.columnList.push(column);
 
-
         dashboard.save()
-        .then(dashboard=>{
-
-            console.log(dashboard);
+            .then( dashboard => {
 
             res.status(201).json({
                 success: true,

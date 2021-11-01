@@ -55,7 +55,6 @@ exports.getOneTicket = (req, res, next) => {
     description,
     labels,
     ticketNumber,
-    associatedDashboard,
     associatedColumn
   } = req.body;
 
@@ -64,7 +63,6 @@ exports.getOneTicket = (req, res, next) => {
     description,
     labels,
     ticketNumber,
-    associatedDashboard,
     associatedColumn
   }).then(ticket => {
       res.status(200).json({ success: true, ticket });

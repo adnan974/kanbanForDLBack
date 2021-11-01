@@ -19,11 +19,6 @@ const ticketSchema = new mongoose.Schema({
   dateInProgressStatus:{
     type:Date,
   },
-  associatedDashboard:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Dashboard",
-    required:true
-  },
   associatedColumn:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Column",

@@ -17,7 +17,7 @@ exports.getUserNotifications = (req, res) => {
             res.status(200).json({ notifications })
         })
         .catch((err) => {
-            res.status(422).json({ error });
+            res.status(422).json({ err });
         })
 
 }

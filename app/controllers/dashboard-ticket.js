@@ -15,12 +15,9 @@ exports.getDashboardTickets = (req, res) => {
         .then(tickets => {
             res.status(200).json({ tickets })
         })
-        .catch(err => {
+        .catch(error => {
             res.status(500).json({
-                errors: [{ error: err }]
+                errors: [{ error }]
             });
         })
-
 }
-
-
